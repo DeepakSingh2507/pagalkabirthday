@@ -1,283 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You ❤️</title>
-
-<style>
-body{
-  margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg,#ffdce5,#ffeede,#fff7f0);
-  color:#6b4c4c;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You ❤️</title>
+  <style>
+.caption {
+  font-family: 'Brush Script MT', cursive;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: #a65c6b;
+  opacity: 0.9;
 }
 
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:rgba(255,255,255,0.6);
-  backdrop-filter:blur(12px);
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  padding:15px;
+/* Floating petals */
+.petal {
+  position: fixed;
+  top: -20px;
+  font-size: 18px;
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); opacity: 0.6; }
 }
 
-nav button{
-  background:none;
-  border:none;
-  font-size:15px;
-  cursor:pointer;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-section{
-  min-height:100vh;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:90px 20px;
-}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffdce5, #ffeede, #fff7f0);
+      color: #6b4c4c;
+      overflow-x: hidden;
+    }
 
-section.active{display:flex;}
+    /* Floating stars background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.25;
+      z-index: -1;
+    }
 
-.card{
-  background:white;
-  padding:35px;
-  border-radius:20px;
-  max-width:700px;
-  text-align:center;
-  box-shadow:0 15px 40px rgba(255,105,135,0.25);
-}
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 15px;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
 
-.btn{
-  margin-top:15px;
-  padding:10px 18px;
-  border:none;
-  border-radius:25px;
-  background:linear-gradient(45deg,#ff8fa3,#ffc2d1);
-  cursor:pointer;
-}
+    nav button {
+      background: transparent;
+      border: none;
+      color: #ffd6e0;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      letter-spacing: 0.5px;
+    }
 
-h1{margin-bottom:10px;}
-.final{white-space:pre-line;}
+    nav button:hover { transform: scale(1.15); color: #fff; }
 
-/* Gallery */
-.gallery-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:15px;
-  margin-top:20px;
-}
+    section {
+      min-height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 20px 40px;
+      text-align: center;
+      animation: fade 0.8s ease;
+    }
 
-.polaroid{
-  overflow:hidden;
-  border-radius:15px;
-  box-shadow:0 15px 40px rgba(255,120,150,0.35);
-}
+    section.active { display: flex; }
 
-.polaroid img{
-  width:100%;
-  animation:zoom 18s infinite alternate ease-in-out;
-}
+    .card {
+      max-width: 820px;
+      background: rgba(255,255,255,0.8);
+      padding: 45px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 15px 40px rgba(255,105,135,0.25);
+      border: 1px solid rgba(255,255,255,0.6);
+    }
 
-@keyframes zoom{
-  from{transform:scale(1);}
-  to{transform:scale(1.12);}
-}
+    h1 { margin-bottom: 15px; font-size: 2.5rem; }
+    p { line-height: 1.7; font-size: 1.1rem; }
 
-.caption{
-  font-family:'Brush Script MT',cursive;
-  margin-top:6px;
-  color:#c05a6d;
-}
+    .typewriter {
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(40, end) forwards, blink 1s infinite;
+      margin: auto;
+    }
 
-/* Petals */
-.petal{
-  position:fixed;
-  top:-20px;
-  animation:fall linear infinite;
-  pointer-events:none;
-}
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg);}
-}
+    .btn {
+      margin-top: 25px;
+      padding: 12px 22px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(45deg, #ff8fa3, #ffc2d1);
+      color: #5c3a3a;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 6px 20px rgba(255,143,163,0.35);
+    }
 
-/* Birthday */
-.birthday-card{
-  background:linear-gradient(135deg,#fff6f9,#fff0f5);
-}
+    .btn:hover { transform: scale(1.1); }
 
-#candle{
-  font-size:2.5rem;
-  animation:flicker 1.5s infinite;
-}
-@keyframes flicker{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.1);}
-}
+    .heart {
+      font-size: 2rem;
+      animation: pulse 1.4s infinite;
+      margin-top: 20px;
+    }
 
-.surprise{
-  opacity:0;
-  transition:.7s;
-}
-.surprise.show{opacity:1;}
+    .timeline { text-align: left; margin-top: 20px; }
 
-.type-cute{
-  font-family:'Brush Script MT',cursive;
-  margin-top:15px;
-}
-</style>
+    .timeline div {
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 12px;
+      background: rgba(255,240,240,0.8);
+      border-left: 3px solid #ff8fa3;
+    }
+
+    .final { font-size: 1.5rem; line-height: 1.7; }
+
+    
+    .floating-heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      to { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes typing { to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+  </style>
 </head>
-
 <body>
 
+
+
 <nav>
-<button onclick="show('home')">Home</button>
-<button onclick="show('story')">Story</button>
-<button onclick="show('memories')">Memories</button>
-<button onclick="show('birthday')">Birthday</button>
-<button onclick="show('gallery')">Her 💖</button>
+  <button onclick="show('home')">Home</button>
+  <button onclick="show('story')">Our Story</button>
+  <button onclick="show('memories')">Things I Love About You</button>
+  <button onclick="show('birthday')">Birthday</button>
+  <button onclick="show('gallery')"> My💖</button>
 </nav>
 
 <!-- HOME -->
 <section id="home" class="active">
-<div class="card">
-<h1>Hey You ❤️</h1>
-<p>This little space is just for you.</p>
-</div>
+  <div class="card">
+    <h1 class="typewriter">Hey Sweetuuu ❤️</h1>
+    <p style="margin-top:20px;"> 
+      You walked into my life quietly,<br>
+      but you became my loudest heartbeat.<br>
+      Before you go further just know this - <br>
+      You are not a chapter in my life,<br>
+      You are the whole story.
+      
+    </p>
+    <button class="btn" onclick="show('story')">Come See What You Are To Me →</button>
+  </div>
 </section>
 
 <!-- STORY -->
 <section id="story">
-<div class="card">
-<h1>Our Beginning ✨</h1>
-<p class="final">
-20 August, 1:48 AM.
-Two strangers. One connection.
-And slowly… you became my favourite person.
-</p>
-</div>
+  <div class="card">
+    <h1>Our Story ✨</h1>
+    <div class="timeline">
+      <div>
+        🌙 <b>20 August, 1:48 AM</b><br>
+        Two strangers met in silence. No faces. No names. Just something real.
+      </div>
+      <div>
+        💬 Late night talks became a habit.<br>
+        And slowly, you became my favourite notification.
+      </div>
+      <div>
+        ❤️ <b>17 November</b><br>
+        The day we stopped pretending and started becoming *us*.
+      </div>
+      <div>
+        ❤️ <b>25 February</b><br>
+        The Universe created something rare today.<br>
+        And Unknowingly the day my future got brighter.
+      </div>
+    </div>
+    <button class="btn" onclick="show('memories')">Next →</button>
+  </div>
 </section>
 
 <!-- MEMORIES -->
 <section id="memories">
-<div class="card">
-<h1>Things I Love About You 💖</h1>
-<p id="memoryLine">Click and read my heart.</p>
-<button class="btn" onclick="nextReason()">Show Next 💌</button>
-</div>
+  <div class="card">
+    <h1>Things I Love About You 💖</h1>
+    <p id="memoryLine" style="font-size:1.1rem;margin-top:10px;">Click below and read my heart, one truth at a time.</p>
+    <button class="btn" onclick="nextReason()">Show Next 💌</button>
+    <div class="heart">❤️</div>
+  </div>
 </section>
 
 <!-- BIRTHDAY -->
 <section id="birthday">
-<div class="card birthday-card">
-<h1>Happy Birthday, My Love 🎂</h1>
+  <div class="card">
+    <h1>Happy Birthday, My Love 🎂</h1>
 
-<p class="final">
-Today is not just another day.
-Today is the day the world became softer.
+    <p id="birthdayText" class="final"></p>
 
-Somewhere in time, you were born…
-And years later, I got lucky enough to exist in the same world as you.
+    <div class="final" style="white-space:pre-line;text-align:left;">
+      Happy Birthday, my love. ❤️
 
-I may not be there,
-but every heartbeat of mine is celebrating you.
-</p>
+      I don’t know how to begin this, because how do you write about someone who feels like a miracle?
+      You came into my life quietly, without footsteps, without warnings.
+      No grand entry — just a late night, a random conversation… and suddenly, you.
 
-<div onclick="blowCandle()">
-<div id="candle">🕯️</div>
-<div>Make a wish…</div>
-</div>
+      20 August, 1:48 AM. Two strangers in the dark, not knowing they were about to change each other’s lives.
+      No faces. No voices. No promises. Just words. And somehow, that was enough.
+      Because in those words, I found warmth. I found honesty. I found you.
 
-<div id="birthdaySurprise" class="surprise">
-I already made mine. ❤️
-</div>
+      Slowly, without realizing, you stopped being a stranger and started becoming home.
+      Then came 17 November — the day my heart stopped pretending it was casual.
+      The day ‘maybe’ turned into ‘us’. The day I chose you, and you chose me.
 
-<div class="type-cute" id="cuteLine"></div>
-</div>
+      Since then, every day feels softer, calmer, brighter — because you exist in it.
+      I haven’t held your hand yet, and still you hold my heart so gently.
+      I haven’t seen your smile in front of me, and still it lives somewhere inside me.
+
+      It amazes me how someone I haven’t met can feel more real than anyone I ever have.
+      You are proof that love doesn’t need distance to disappear — it just needs two real hearts.
+
+      And today is your birthday.
+      The day the world got lucky enough to receive you.
+
+      I wish I could be there. Standing beside you. Looking into your eyes when I say this.
+      But until that day comes, let these words be my presence.
+
+      You are deeply loved — in ways I don’t always know how to explain.
+      You are cherished in the quiet parts of my day, in the pauses between my thoughts.
+      You are the person I unknowingly wait for in every notification.
+
+      And if distance is the price I pay to have you right now… it’s a price I’ll always accept.
+      Because some people are worth waiting for.
+      Some souls are worth crossing time for.
+      And you… are worth every second between now and the moment I finally meet you.
+
+      Happy Birthday, my love.
+      Until I can say this holding your hand — let these words hold you instead.
+
+      I love you. Forever. ❤️
+    </div>
+
+    <button class="btn" onclick="showReasons()"><div class="heart">❤️</div>
+  </div>
 </section>
 
 <!-- GALLERY -->
 <section id="gallery">
-<div class="card">
-<h1>My Favourite Photos of You 💖</h1>
+  <div class="card">
+    <h1>My Favourite Pictures of You 💖</h1>
 
-<div class="gallery-grid">
-<div>
-<div class="polaroid"><img src="./images/her1.jpg"></div>
-<div class="caption">Your text here</div>
-</div>
-<div>
-<div class="polaroid"><img src="./images/her2.jpg"></div>
-<div class="caption">Your text here</div>
-</div>
-<div>
-<div class="polaroid"><img src="./images/her3.jpg"></div>
-<div class="caption">Your text here</div>
-</div>
-<div>
-<div class="polaroid"><img src="./images/her4.jpg"></div>
-<div class="caption">Your text here</div>
-</div>
-</div>
+    <div class="gallery-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;margin-top:20px;">
+      <div class="polaroid"><img src="images/her1.jpeg" class="photo" /><div class="caption">Your text here...</div></div>
+      <div class="polaroid"><img src="images/her2.jpeg" class="photo" /><div class="caption">Your text here...</div></div>
+      <div class="polaroid"><img src="images/her3.jpeg" class="photo" /><div class="caption">Your text here...</div></div>
+      <div class="polaroid"><img src="images/her4.jpeg" class="photo" /><div class="caption">Your text here...</div></div>
+    </div>
 
-</div>
+    
+
+    <!-- Cute Stickers -->
+    <div style="margin-top:20px;font-style:italic;opacity:0.75;">Some moments don’t need words. Just you. ❤️</div>
+
+    <div class="stickers" style="margin-top:25px;font-size:1.8rem;">
+      💕 🌸 💖 🧸 ✨ 💌 🌷 🫶 💞
+    </div>
+  </div>
 </section>
 
-<!-- YOUTUBE MUSIC -->
-<iframe width="0" height="0"
-src="https://www.youtube.com/embed/7LRMVzjylpA?autoplay=1&loop=1&playlist=7LRMVzjylpA"
-allow="autoplay"></iframe>
+<style>
+.gallery-grid { position: relative; }
+
+.polaroid {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(255,120,150,0.35);
+}
+.polaroid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.35), transparent 60%);
+}
+.polaroid img, .photo.polaroid {
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+.polaroid img, .photo.polaroid { transition: transform 8s ease, filter 1s ease; }
+.polaroid img { animation: slowZoom 20s infinite alternate ease-in-out; }
+@keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.12); } }
+.polaroid:nth-child(even) { transform: rotate(1.5deg); }
+.photo {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(255,150,170,0.4);
+  transition: 0.3s ease;
+}
+.photo:hover {
+  transform: scale(1.05);
+}
+</style>
 
 <script>
-function show(id){
-document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
+  function show(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
 
-/* 50 reasons */
-const reasons=[
-"Your smile","Your voice","Your honesty","Your softness",
-"The way you care","Your presence","Your heart",
-"Your warmth","Your patience","Your soul"
-];
-let r=0;
+  const lines = [
+    "The way you understand me without trying.",
+    "How distance never made you feel far.",
+    "Your late-night messages that fix my days.",
+    "The comfort I never knew I needed.",
+    "How you became home without a location."
+  ];
+
+  let i = 0;
+  function nextLove() {
+    document.getElementById('loveText').textContent = lines[i];
+    i = (i + 1) % lines.length;
+  }
+
+  // ===== 50 Reasons =====
+  const reasons = [
+    "Your kindness.",
+    "The way you understand me.",
+    "Your late night messages.",
+    "How you make distance feel small.",
+    "Your honesty.",
+    "Your softness.",
+    "The comfort you give me.",
+    "Your patience with me.",
+    "The way you listen.",
+    "How you make ordinary moments special.",
+    "Your pure heart.",
+    "Your loyalty.",
+    "Your calm energy.",
+    "How safe you make me feel.",
+    "Your smile I imagine every day.",
+    "Your words that heal me.",
+    "Your emotional depth.",
+    "The way you care.",
+    "How you stayed.",
+    "How real you are.",
+    "You make me want to be better.",
+    "Your warmth.",
+    "Your presence in my life.",
+    "The way you became home.",
+    "Your beautiful soul.",
+    "How you understand my silence.",
+    "You make me feel chosen.",
+    "Your effort.",
+    "Your love for little things.",
+    "How you make me smile randomly.",
+    "Your emotional strength.",
+    "Your vulnerability.",
+    "How you trust me.",
+    "You make love feel simple.",
+    "You make waiting worth it.",
+    "Your late night honesty.",
+    "The way you calm my chaos.",
+    "How you changed my world.",
+    "You make distance romantic.",
+    "Your unseen hugs in words.",
+    "You make me believe in love.",
+    "Your gentle heart.",
+    "Your consistency.",
+    "Your innocence.",
+    "How you exist in my thoughts.",
+    "You make life softer.",
+    "You are my peace.",
+    "You are my favourite person.",
+    "You are my today and tomorrow.",
+    "And simply… because you are you."
+  ];
+
+  function showReasons() {
+    const box = document.getElementById('reasonsBox');
+    box.style.display = 'block';
+    box.innerHTML = reasons.map((r,i)=> `${i+1}. ${r}`).join('<br>');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById('birthdayText');
+    if (el) el.textContent = birthdayLines[0];
+  });
+
+  // Floating hearts generator
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.textContent = '❤';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 800);
+  // ===== Interactive Reasons (Memories Page) =====
+let rIndex = 0;
 function nextReason(){
-document.getElementById('memoryLine').textContent=reasons[r];
-r=(r+1)%reasons.length;
+  const el = document.getElementById('memoryLine');
+  if(!el) return;
+  el.textContent = reasons[rIndex];
+  rIndex = (rIndex + 1) % reasons.length;
 }
 
-/* Candle */
-function blowCandle(){
-document.getElementById('candle').textContent='✨';
-document.getElementById('birthdaySurprise').classList.add('show');
+// Petals only on gallery
+setInterval(spawnPetal, 800);
+</script>
 
-const lines=[
-"If I were there, I'd steal your cake.",
-"Then pretend I didn't.",
-"And hug you too long."
-];
-let i=0;
-const el=document.getElementById('cuteLine');
-const inter=setInterval(()=>{
-if(i<lines.length){el.textContent=lines[i];i++;}
-else clearInterval(inter);
-},1200);
+<!-- YouTube Music Placeholder -->
+<!-- Paste your YouTube embed link below (replace VIDEO_ID) -->
+<!-- Example: https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID -->
+<iframe id="ytPlayer" width="0" height="0" src="https://www.youtube.com/embed/7LRMVzjylpA?autoplay=1&loop=1&playlist=7LRMVzjylpA" frameborder="0" allow="autoplay"></iframe>
+
+<!-- Sajda Music (fallback local) -->
+<audio id="bgMusic" loop>
+  <source src="https://pagalworld.com.se/files/download/type/320/id/60233" type="audio/mpeg">
+</audio>
+
+<script>
+// Play music on first user interaction (fix mobile autoplay issues)
+let musicStarted = false;
+document.addEventListener('click', () => {
+  if (!musicStarted) {
+    const yt = document.getElementById('ytPlayer');
+    if (yt && yt.src) {
+      // YouTube will play if link provided
+    } else {
+      const music = document.getElementById('bgMusic');
+      if (music) music.play().catch(()=>{});
+    }
+    musicStarted = true;
+  }
+});
+    musicStarted = true;
+  }
+}););
+  document.getElementById('musicOverlay').style.display = 'none';
 }
 
-/* Petals on gallery */
-setInterval(()=>{
-if(!document.getElementById('gallery').classList.contains('active')) return;
-const p=document.createElement('div');
-p.className='petal';
-p.textContent='🌸';
-p.style.left=Math.random()*100+'vw';
-p.style.animationDuration=(Math.random()*5+5)+'s';
-document.body.appendChild(p);
-setTimeout(()=>p.remove(),8000);
-},800);
+function enterSite() {
+  const music = document.getElementById('bgMusic');
+  if (music) music.play().catch(()=>{});
+});
+}
 </script>
 
 </body>
