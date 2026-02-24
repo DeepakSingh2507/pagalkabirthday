@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You ❤️</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #ff758c, #ff7eb3);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px;
+      z-index: 1000;
+    }
+
+    nav button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    nav button:hover { transform: scale(1.1); }
+
+    section {
+      min-height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 20px 40px;
+      text-align: center;
+      animation: fade 0.6s ease;
+    }
+
+    section.active { display: flex; }
+
+    .card {
+      max-width: 800px;
+      background: rgba(255,255,255,0.12);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+
+    h1 { margin-bottom: 15px; font-size: 2.4rem; }
+    p { line-height: 1.7; font-size: 1.1rem; }
+
+    .typewriter {
+      border-right: 2px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(40, end) forwards, blink 1s infinite;
+      margin: auto;
+    }
+
+    .btn {
+      margin-top: 25px;
+      padding: 10px 18px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      background: white;
+      color: #ff4d6d;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover { transform: scale(1.1); }
+
+    .heart {
+      font-size: 2rem;
+      animation: pulse 1.4s infinite;
+      margin-top: 20px;
+    }
+
+    .timeline {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    .timeline div {
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .final {
+      font-size: 1.6rem;
+      line-height: 1.6;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes typing { to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <button onclick="show('home')">Home</button>
+  <button onclick="show('story')">Our Story</button>
+  <button onclick="show('memories')">Memories</button>
+  <button onclick="show('birthday')">Birthday</button>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="active">
+  <div class="card">
+    <h1 class="typewriter">Hey You... ❤️</h1>
+    <p style="margin-top:20px;">
+      This isn't just a website. 
+      It's a little world I made for you.
+      A place where every click holds a feeling.
+    </p>
+    <button class="btn" onclick="show('story')">Enter Our Story →</button>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="card">
+    <h1>Our Beginning ✨</h1>
+    <div class="timeline">
+      <div>
+        🌙 <b>20 August, 1:48 AM</b><br>
+        Two strangers met in silence. No faces. No names. Just something real.
+      </div>
+      <div>
+        💬 Late night talks became a habit.<br>
+        And slowly, you became my favourite notification.
+      </div>
+      <div>
+        ❤️ <b>17 November</b><br>
+        The day we stopped pretending and started becoming *us*.
+      </div>
+    </div>
+    <button class="btn" onclick="show('memories')">Next →</button>
+  </div>
+</section>
+
+<!-- MEMORIES -->
+<section id="memories">
+  <div class="card">
+    <h1>Things I Love About You 💖</h1>
+    <p id="loveText">Click the button...</p>
+    <button class="btn" onclick="nextLove()">Show One</button>
+    <div class="heart">❤️</div>
+  </div>
+</section>
+
+<!-- BIRTHDAY -->
+<section id="birthday">
+  <div class="card">
+    <h1>Happy Birthday, My Love 🎂</h1>
+
+    <p id="birthdayText" class="final"></p>
+
+    <button class="btn" onclick="nextLine()">Read More 💌</button>
+
+    <div style="margin-top:15px;font-size:0.9rem;opacity:0.7;">
+      Every click reveals another piece of my heart.
+    </div>
+
+    <div class="heart">❤️</div>
+  </div>
+</section>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  const lines = [
+    "The way you understand me without trying.",
+    "How distance never made you feel far.",
+    "Your late-night messages that fix my days.",
+    "The comfort I never knew I needed.",
+    "How you became home without a location."
+  ];
+
+  let i = 0;
+  function nextLove() {
+    document.getElementById('loveText').textContent = lines[i];
+    i = (i + 1) % lines.length;
+  }
+
+  // ===== Interactive Birthday Letter =====
+  const birthdayLines = [
+    "I don’t know how to begin this, because how do you write about someone who feels like a miracle?",
+    "You came into my life quietly, without footsteps, without warnings.",
+    "No grand entry — just a late night, a random conversation… and suddenly, you.",
+    "20 August, 1:48 AM. Two strangers in the dark, not knowing they were about to change each other’s lives.",
+    "No faces. No voices. No promises. Just words. And somehow, that was enough.",
+    "Because in those words, I found warmth. I found honesty. I found you.",
+    "Slowly, without realizing, you stopped being a stranger and started becoming home.",
+    "Then came 17 November — the day my heart stopped pretending it was casual.",
+    "The day ‘maybe’ turned into ‘us’. The day I chose you, and you chose me.",
+    "Since then, every day feels softer, calmer, brighter — because you exist in it.",
+    "I haven’t held your hand yet, and still you hold my heart so gently.",
+    "I haven’t seen your smile in front of me, and still it lives somewhere inside me.",
+    "It amazes me how someone I haven’t met can feel more real than anyone I ever have.",
+    "You are proof that love doesn’t need distance to disappear — it just needs two real hearts.",
+    "And today is your birthday. The day the world got lucky enough to receive you.",
+    "I wish I could be there. Standing beside you. Looking into your eyes when I say this.",
+    "But until that day comes, let this be my presence.",
+    "You are deeply loved — in ways I don’t always know how to explain.",
+    "You are cherished in the quiet parts of my day, in the pauses between my thoughts.",
+    "You are the person I unknowingly wait for in every notification.",
+    "And if distance is the price I pay to have you right now… it’s a price I’ll always accept.",
+    "Because some people are worth waiting for.",
+    "Some souls are worth crossing time for.",
+    "And you… are worth every second between now and the moment I finally meet you.",
+    "Happy Birthday, my love.",
+    "Until I can say this holding your hand — let these words hold you instead."
+  ];
+
+  let b = 0;
+  function nextLine() {
+    const el = document.getElementById('birthdayText');
+    el.textContent = birthdayLines[b];
+    b = (b + 1) % birthdayLines.length;
+  }
+
+  // show first line automatically when birthday page opens
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById('birthdayText');
+    if (el) el.textContent = birthdayLines[0];
+  });
+</script>
+
+<!-- Music Overlay -->
+<div id="musicOverlay" style="position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:2000;flex-direction:column;color:white;">
+  <h2>💖 Tap to Start the Surprise 💖</h2>
+  <button onclick="startMusic()" style="margin-top:20px;padding:12px 20px;border-radius:25px;border:none;background:#ff4d6d;color:white;font-size:16px;cursor:pointer;">Enter</button>
+</div>
+
+<!-- Sajda Music -->
+<audio id="bgMusic" loop>
+  <source src="https://pagalworld.com.se/files/download/type/320/id/60233" type="audio/mpeg">
+</audio>
+
+<script>
+function startMusic() {
+  const music = document.getElementById('bgMusic');
+  music.play().catch(()=>{});
+  document.getElementById('musicOverlay').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
