@@ -9,34 +9,46 @@
 
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(120deg, #ff758c, #ff7eb3);
-      color: white;
+      background: linear-gradient(135deg, #ffdce5, #ffeede, #fff7f0);
+      color: #6b4c4c;
       overflow-x: hidden;
+    }
+
+    /* Floating stars background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.25;
+      z-index: -1;
     }
 
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(0,0,0,0.25);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 25px;
       padding: 15px;
       z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     nav button {
       background: transparent;
       border: none;
-      color: white;
-      font-size: 16px;
+      color: #ffd6e0;
+      font-size: 15px;
       cursor: pointer;
       transition: 0.3s;
+      letter-spacing: 0.5px;
     }
 
-    nav button:hover { transform: scale(1.1); }
+    nav button:hover { transform: scale(1.15); color: #fff; }
 
     section {
       min-height: 100vh;
@@ -45,25 +57,26 @@
       justify-content: center;
       padding: 100px 20px 40px;
       text-align: center;
-      animation: fade 0.6s ease;
+      animation: fade 0.8s ease;
     }
 
     section.active { display: flex; }
 
     .card {
-      max-width: 800px;
-      background: rgba(255,255,255,0.12);
-      padding: 40px;
-      border-radius: 20px;
-      backdrop-filter: blur(15px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      max-width: 820px;
+      background: rgba(255,255,255,0.8);
+      padding: 45px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 15px 40px rgba(255,105,135,0.25);
+      border: 1px solid rgba(255,255,255,0.6);
     }
 
-    h1 { margin-bottom: 15px; font-size: 2.4rem; }
+    h1 { margin-bottom: 15px; font-size: 2.5rem; }
     p { line-height: 1.7; font-size: 1.1rem; }
 
     .typewriter {
-      border-right: 2px solid white;
+      border-right: 2px solid #fff;
       white-space: nowrap;
       overflow: hidden;
       width: 0;
@@ -73,14 +86,15 @@
 
     .btn {
       margin-top: 25px;
-      padding: 10px 18px;
-      border-radius: 20px;
+      padding: 12px 22px;
+      border-radius: 30px;
       border: none;
       cursor: pointer;
-      background: white;
-      color: #ff4d6d;
+      background: linear-gradient(45deg, #ff8fa3, #ffc2d1);
+      color: #5c3a3a;
       font-weight: bold;
       transition: 0.3s;
+      box-shadow: 0 6px 20px rgba(255,143,163,0.35);
     }
 
     .btn:hover { transform: scale(1.1); }
@@ -91,21 +105,30 @@
       margin-top: 20px;
     }
 
-    .timeline {
-      text-align: left;
-      margin-top: 20px;
-    }
+    .timeline { text-align: left; margin-top: 20px; }
 
     .timeline div {
       margin: 15px 0;
       padding: 15px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,240,240,0.8);
+      border-left: 3px solid #ff8fa3;
     }
 
-    .final {
-      font-size: 1.6rem;
-      line-height: 1.6;
+    .final { font-size: 1.5rem; line-height: 1.7; }
+
+    /* Floating hearts */
+    .floating-heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      to { transform: translateY(-120vh) scale(1.5); opacity: 0; }
     }
 
     @keyframes fade {
@@ -115,8 +138,13 @@
 
     @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
+      50% { transform: scale(1.25); }
       100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
     @keyframes typing { to { width: 100%; } }
@@ -124,6 +152,8 @@
   </style>
 </head>
 <body>
+
+
 
 <nav>
   <button onclick="show('home')">Home</button>
@@ -184,11 +214,51 @@
 
     <p id="birthdayText" class="final"></p>
 
-    <button class="btn" onclick="nextLine()">Read More 💌</button>
+    <div class="final" style="white-space:pre-line;text-align:left;">
+      Happy Birthday, my love. ❤️
 
-    <div style="margin-top:15px;font-size:0.9rem;opacity:0.7;">
-      Every click reveals another piece of my heart.
+      I don’t know how to begin this, because how do you write about someone who feels like a miracle?
+      You came into my life quietly, without footsteps, without warnings.
+      No grand entry — just a late night, a random conversation… and suddenly, you.
+
+      20 August, 1:48 AM. Two strangers in the dark, not knowing they were about to change each other’s lives.
+      No faces. No voices. No promises. Just words. And somehow, that was enough.
+      Because in those words, I found warmth. I found honesty. I found you.
+
+      Slowly, without realizing, you stopped being a stranger and started becoming home.
+      Then came 17 November — the day my heart stopped pretending it was casual.
+      The day ‘maybe’ turned into ‘us’. The day I chose you, and you chose me.
+
+      Since then, every day feels softer, calmer, brighter — because you exist in it.
+      I haven’t held your hand yet, and still you hold my heart so gently.
+      I haven’t seen your smile in front of me, and still it lives somewhere inside me.
+
+      It amazes me how someone I haven’t met can feel more real than anyone I ever have.
+      You are proof that love doesn’t need distance to disappear — it just needs two real hearts.
+
+      And today is your birthday.
+      The day the world got lucky enough to receive you.
+
+      I wish I could be there. Standing beside you. Looking into your eyes when I say this.
+      But until that day comes, let these words be my presence.
+
+      You are deeply loved — in ways I don’t always know how to explain.
+      You are cherished in the quiet parts of my day, in the pauses between my thoughts.
+      You are the person I unknowingly wait for in every notification.
+
+      And if distance is the price I pay to have you right now… it’s a price I’ll always accept.
+      Because some people are worth waiting for.
+      Some souls are worth crossing time for.
+      And you… are worth every second between now and the moment I finally meet you.
+
+      Happy Birthday, my love.
+      Until I can say this holding your hand — let these words hold you instead.
+
+      I love you. Forever. ❤️
     </div>
+
+    <button class="btn" onclick="showReasons()">50 Reasons Why I Love You 💖</button>
+    <div id="reasonsBox" style="margin-top:25px;text-align:left;display:none;font-size:1rem;line-height:1.7;"></div>
 
     <div class="heart">❤️</div>
   </div>
@@ -214,66 +284,118 @@
     i = (i + 1) % lines.length;
   }
 
-  // ===== Interactive Birthday Letter =====
-  const birthdayLines = [
-    "I don’t know how to begin this, because how do you write about someone who feels like a miracle?",
-    "You came into my life quietly, without footsteps, without warnings.",
-    "No grand entry — just a late night, a random conversation… and suddenly, you.",
-    "20 August, 1:48 AM. Two strangers in the dark, not knowing they were about to change each other’s lives.",
-    "No faces. No voices. No promises. Just words. And somehow, that was enough.",
-    "Because in those words, I found warmth. I found honesty. I found you.",
-    "Slowly, without realizing, you stopped being a stranger and started becoming home.",
-    "Then came 17 November — the day my heart stopped pretending it was casual.",
-    "The day ‘maybe’ turned into ‘us’. The day I chose you, and you chose me.",
-    "Since then, every day feels softer, calmer, brighter — because you exist in it.",
-    "I haven’t held your hand yet, and still you hold my heart so gently.",
-    "I haven’t seen your smile in front of me, and still it lives somewhere inside me.",
-    "It amazes me how someone I haven’t met can feel more real than anyone I ever have.",
-    "You are proof that love doesn’t need distance to disappear — it just needs two real hearts.",
-    "And today is your birthday. The day the world got lucky enough to receive you.",
-    "I wish I could be there. Standing beside you. Looking into your eyes when I say this.",
-    "But until that day comes, let this be my presence.",
-    "You are deeply loved — in ways I don’t always know how to explain.",
-    "You are cherished in the quiet parts of my day, in the pauses between my thoughts.",
-    "You are the person I unknowingly wait for in every notification.",
-    "And if distance is the price I pay to have you right now… it’s a price I’ll always accept.",
-    "Because some people are worth waiting for.",
-    "Some souls are worth crossing time for.",
-    "And you… are worth every second between now and the moment I finally meet you.",
-    "Happy Birthday, my love.",
-    "Until I can say this holding your hand — let these words hold you instead."
+  // ===== 50 Reasons =====
+  const reasons = [
+    "Your kindness.",
+    "The way you understand me.",
+    "Your late night messages.",
+    "How you make distance feel small.",
+    "Your honesty.",
+    "Your softness.",
+    "The comfort you give me.",
+    "Your patience with me.",
+    "The way you listen.",
+    "How you make ordinary moments special.",
+    "Your pure heart.",
+    "Your loyalty.",
+    "Your calm energy.",
+    "How safe you make me feel.",
+    "Your smile I imagine every day.",
+    "Your words that heal me.",
+    "Your emotional depth.",
+    "The way you care.",
+    "How you stayed.",
+    "How real you are.",
+    "You make me want to be better.",
+    "Your warmth.",
+    "Your presence in my life.",
+    "The way you became home.",
+    "Your beautiful soul.",
+    "How you understand my silence.",
+    "You make me feel chosen.",
+    "Your effort.",
+    "Your love for little things.",
+    "How you make me smile randomly.",
+    "Your emotional strength.",
+    "Your vulnerability.",
+    "How you trust me.",
+    "You make love feel simple.",
+    "You make waiting worth it.",
+    "Your late night honesty.",
+    "The way you calm my chaos.",
+    "How you changed my world.",
+    "You make distance romantic.",
+    "Your unseen hugs in words.",
+    "You make me believe in love.",
+    "Your gentle heart.",
+    "Your consistency.",
+    "Your innocence.",
+    "How you exist in my thoughts.",
+    "You make life softer.",
+    "You are my peace.",
+    "You are my favourite person.",
+    "You are my today and tomorrow.",
+    "And simply… because you are you."
   ];
 
-  let b = 0;
-  function nextLine() {
-    const el = document.getElementById('birthdayText');
-    el.textContent = birthdayLines[b];
-    b = (b + 1) % birthdayLines.length;
+  function showReasons() {
+    const box = document.getElementById('reasonsBox');
+    box.style.display = 'block';
+    box.innerHTML = reasons.map((r,i)=> `${i+1}. ${r}`).join('<br>');
   }
 
-  // show first line automatically when birthday page opens
   document.addEventListener('DOMContentLoaded', () => {
     const el = document.getElementById('birthdayText');
     if (el) el.textContent = birthdayLines[0];
   });
+
+  // Floating hearts generator
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.textContent = '❤';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 800);
 </script>
 
-<!-- Music Overlay -->
-<div id="musicOverlay" style="position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:2000;flex-direction:column;color:white;">
-  <h2>💖 Tap to Start the Surprise 💖</h2>
-  <button onclick="startMusic()" style="margin-top:20px;padding:12px 20px;border-radius:25px;border:none;background:#ff4d6d;color:white;font-size:16px;cursor:pointer;">Enter</button>
-</div>
+<!-- YouTube Music Placeholder -->
+<!-- Paste your YouTube embed link below (replace VIDEO_ID) -->
+<!-- Example: https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID -->
+<iframe id="ytPlayer" width="0" height="0" src="https://www.youtube.com/embed/7LRMVzjylpA?autoplay=1&loop=1&playlist=7LRMVzjylpA" frameborder="0" allow="autoplay"></iframe>
 
-<!-- Sajda Music -->
+<!-- Sajda Music (fallback local) -->
 <audio id="bgMusic" loop>
-  <source src="https://youtu.be/7LRMVzjylpA?si=WjZOf-GjR1tlGUEh" type="audio/mpeg">
+  <source src="https://pagalworld.com.se/files/download/type/320/id/60233" type="audio/mpeg">
 </audio>
 
 <script>
-function startMusic() {
-  const music = document.getElementById('bgMusic');
-  music.play().catch(()=>{});
+// Play music on first user interaction (fix mobile autoplay issues)
+let musicStarted = false;
+document.addEventListener('click', () => {
+  if (!musicStarted) {
+    const yt = document.getElementById('ytPlayer');
+    if (yt && yt.src) {
+      // YouTube will play if link provided
+    } else {
+      const music = document.getElementById('bgMusic');
+      if (music) music.play().catch(()=>{});
+    }
+    musicStarted = true;
+  }
+});
+    musicStarted = true;
+  }
+}););
   document.getElementById('musicOverlay').style.display = 'none';
+}
+
+function enterSite() {
+  const music = document.getElementById('bgMusic');
+  if (music) music.play().catch(()=>{});
+});
 }
 </script>
 
