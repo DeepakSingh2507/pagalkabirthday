@@ -160,6 +160,7 @@
   <button onclick="show('story')">Our Story</button>
   <button onclick="show('memories')">Memories</button>
   <button onclick="show('birthday')">Birthday</button>
+  <button onclick="show('gallery')">Her 💖</button>
 </nav>
 
 <!-- HOME -->
@@ -263,6 +264,61 @@
     <div class="heart">❤️</div>
   </div>
 </section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="card">
+    <h1>My Favourite Pictures of You 💖</h1>
+
+    <div class="gallery-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;margin-top:20px;">
+      <img src="her1.jpg" class="photo polaroid" />
+      <img src="her2.jpg" class="photo polaroid" />
+      <img src="her3.jpg" class="photo polaroid" />
+      <img src="her4.jpg" class="photo polaroid" />
+    </div>
+
+    
+
+    <!-- Cute Stickers -->
+    <div style="margin-top:20px;font-style:italic;opacity:0.75;">Some moments don’t need words. Just you. ❤️</div>
+
+    <div class="stickers" style="margin-top:25px;font-size:1.8rem;">
+      💕 🌸 💖 🧸 ✨ 💌 🌷 🫶 💞
+    </div>
+  </div>
+</section>
+
+<style>
+.polaroid {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(255,120,150,0.35);
+}
+.polaroid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.35), transparent 60%);
+}
+.polaroid img, .photo.polaroid {
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+.polaroid:hover img, .photo.polaroid:hover {
+  transform: scale(1.08);
+  filter: brightness(1.05) contrast(1.05);
+}
+.polaroid:nth-child(even) { transform: rotate(1.5deg); }
+.photo {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(255,150,170,0.4);
+  transition: 0.3s ease;
+}
+.photo:hover {
+  transform: scale(1.05);
+}
+</style>
 
 <script>
   function show(id) {
@@ -401,3 +457,4 @@ function enterSite() {
 
 </body>
 </html>
+
