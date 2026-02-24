@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>For You ❤️</title>
   <style>
+.caption {
+  font-family: 'Brush Script MT', cursive;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: #a65c6b;
+  opacity: 0.9;
+}
+
+/* Floating petals */
+.petal {
+  position: fixed;
+  top: -20px;
+  font-size: 18px;
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); opacity: 0.6; }
+}
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -202,8 +223,8 @@
 <section id="memories">
   <div class="card">
     <h1>Things I Love About You 💖</h1>
-    <p id="loveText">Click the button...</p>
-    <button class="btn" onclick="nextLove()">Show One</button>
+    <p id="memoryLine" style="font-size:1.1rem;margin-top:10px;">Click below and read my heart, one truth at a time.</p>
+    <button class="btn" onclick="nextReason()">Show Next 💌</button>
     <div class="heart">❤️</div>
   </div>
 </section>
@@ -258,10 +279,7 @@
       I love you. Forever. ❤️
     </div>
 
-    <button class="btn" onclick="showReasons()">50 Reasons Why I Love You 💖</button>
-    <div id="reasonsBox" style="margin-top:25px;text-align:left;display:none;font-size:1rem;line-height:1.7;"></div>
-
-    <div class="heart">❤️</div>
+    <button class="btn" onclick="showReasons()"><div class="heart">❤️</div>
   </div>
 </section>
 
@@ -271,10 +289,10 @@
     <h1>My Favourite Pictures of You 💖</h1>
 
     <div class="gallery-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;margin-top:20px;">
-      <img src="images/her1.jpg" class="photo polaroid" />
-      <img src="images/her2.jpg" class="photo polaroid" />
-      <img src="images/her3.jpg" class="photo polaroid" />
-      <img src="images/her4.jpg" class="photo polaroid" />
+      <div class="polaroid"><img src="images/her1.jpg" class="photo" /><div class="caption">Your text here...</div></div>
+      <div class="polaroid"><img src="images/her2.jpg" class="photo" /><div class="caption">Your text here...</div></div>
+      <div class="polaroid"><img src="images/her3.jpg" class="photo" /><div class="caption">Your text here...</div></div>
+      <div class="polaroid"><img src="images/her4.jpg" class="photo" /><div class="caption">Your text here...</div></div>
     </div>
 
     
@@ -289,6 +307,8 @@
 </section>
 
 <style>
+.gallery-grid { position: relative; }
+
 .polaroid {
   position: relative;
   overflow: hidden;
@@ -304,10 +324,9 @@
 .polaroid img, .photo.polaroid {
   transition: transform 0.6s ease, filter 0.6s ease;
 }
-.polaroid:hover img, .photo.polaroid:hover {
-  transform: scale(1.08);
-  filter: brightness(1.05) contrast(1.05);
-}
+.polaroid img, .photo.polaroid { transition: transform 8s ease, filter 1s ease; }
+.polaroid img { animation: slowZoom 20s infinite alternate ease-in-out; }
+@keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.12); } }
 .polaroid:nth-child(even) { transform: rotate(1.5deg); }
 .photo {
   width: 100%;
@@ -415,6 +434,17 @@
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6000);
   }, 800);
+  // ===== Interactive Reasons (Memories Page) =====
+let rIndex = 0;
+function nextReason(){
+  const el = document.getElementById('memoryLine');
+  if(!el) return;
+  el.textContent = reasons[rIndex];
+  rIndex = (rIndex + 1) % reasons.length;
+}
+
+// Petals only on gallery
+setInterval(spawnPetal, 800);
 </script>
 
 <!-- YouTube Music Placeholder -->
