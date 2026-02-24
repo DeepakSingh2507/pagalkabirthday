@@ -119,44 +119,7 @@
       transition: 0.3s;
       box-shadow: 0 6px 20px rgba(255,143,163,0.35);
     }
-    /* FULLSCREEN OVERLAY */
-#countdownScreen, #lockScreen{
-position:fixed;
-inset:0;
-background:linear-gradient(135deg,#ffdce5,#ffeede);
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:99999;
-}
-
-.lockBox{
-background:white;
-padding:40px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 20px 60px rgba(0,0,0,0.25);
-max-width:320px;
-}
-
-.lockBox input{
-margin-top:10px;
-padding:10px;
-border-radius:20px;
-border:none;
-background:#ffeef3;
-text-align:center;
-}
-
-.lockBox button{
-margin-top:10px;
-padding:10px 18px;
-border:none;
-border-radius:20px;
-background:#ff8fa3;
-color:white;
-cursor:pointer;
-}
+    
 
     .btn:hover { transform: scale(1.1); }
 
@@ -188,6 +151,45 @@ cursor:pointer;
       pointer-events: none;
     }
 
+    /* PASSWORD LOCK */
+#lockScreen{
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#ffdce5,#ffeede);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:99999;
+}
+
+.lockBox{
+background:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 20px 60px rgba(0,0,0,0.25);
+max-width:320px;
+}
+
+.lockBox input{
+margin-top:10px;
+padding:10px;
+border-radius:20px;
+border:none;
+background:#ffeef3;
+text-align:center;
+}
+
+.lockBox button{
+margin-top:12px;
+padding:10px 18px;
+border:none;
+border-radius:20px;
+background:#ff8fa3;
+color:white;
+cursor:pointer;
+}
+
     @keyframes floatUp {
       to { transform: translateY(-120vh) scale(1.5); opacity: 0; }
     }
@@ -213,16 +215,17 @@ cursor:pointer;
   </style>
 </head>
 <body>
-  
-
-<!-- PASSWORD SCREEN (hidden initially) -->
-<div id="lockScreen" style="display:none;">
+  <!-- SIMPLE PASSWORD LOCK -->
+<div id="lockScreen">
   <div class="lockBox">
-    <h2>It's Your Day 🎂</h2>
-    <input id="lockPass" placeholder="Enter password..." />
-    <button onclick="tryUnlock()">Enter</button>
+    <h2>Enter Password ❤️</h2>
+    <p style="opacity:0.7;font-size:0.9rem;">Hint: 3 digits 😉</p>
+
+    <input id="lockPass" placeholder="Enter here..." />
+    <button onclick="unlockSite()">Enter</button>
   </div>
 </div>
+
 
 
 
@@ -519,17 +522,10 @@ function enterSite() {
 });
 }
 
-  /* ===============================
-   COUNTDOWN → PASSWORD FLOW
-================================ */
-
-
+// SIMPLE LOCK SYSTEM
 const correctPassword = "148";
 
-// countdown logic
-
-// password unlock
-function tryUnlock(){
+function unlockSite(){
   const val = document.getElementById("lockPass").value.trim();
 
   if(val === correctPassword){
@@ -538,7 +534,6 @@ function tryUnlock(){
     alert("Wrong password 😝");
   }
 }
-
 
 </script>
 
