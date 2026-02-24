@@ -213,13 +213,7 @@ cursor:pointer;
   </style>
 </head>
 <body>
-  <!-- COUNTDOWN SCREEN -->
-<div id="countdownScreen">
-  <div class="lockBox">
-    <h2>Something unlocks soon ❤️</h2>
-    <p id="countdownText"></p>
-  </div>
-</div>
+  
 
 <!-- PASSWORD SCREEN (hidden initially) -->
 <div id="lockScreen" style="display:none;">
@@ -529,29 +523,10 @@ function enterSite() {
    COUNTDOWN → PASSWORD FLOW
 ================================ */
 
-const unlockTime = new Date("2026-02-24T22:22:00").getTime();
+
 const correctPassword = "148";
 
 // countdown logic
-function updateCountdown(){
-  const now = new Date().getTime();
-  const diff = unlockTime - now;
-  const text = document.getElementById("countdownText");
-
-  if(diff <= 0){
-    // switch screens
-    document.getElementById("countdownScreen").style.display = "none";
-    document.getElementById("lockScreen").style.display = "flex";
-    return;
-  }
-
-  const days = Math.floor(diff/(1000*60*60*24));
-  const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  const mins = Math.floor((diff%(1000*60*60))/(1000*60));
-  const secs = Math.floor((diff%(1000*60))/1000);
-
-  text.innerText = `${days}d ${hours}h ${mins}m ${secs}s`;
-}
 
 // password unlock
 function tryUnlock(){
@@ -564,9 +539,7 @@ function tryUnlock(){
   }
 }
 
-// start countdown
-setInterval(updateCountdown,1000);
-updateCountdown();
+
 </script>
 
 </body>
