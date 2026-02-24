@@ -14,6 +14,8 @@
   opacity: 0.9;
 }
 
+  
+
 /* Floating petals */
 .petal {
   position: fixed;
@@ -117,6 +119,44 @@
       transition: 0.3s;
       box-shadow: 0 6px 20px rgba(255,143,163,0.35);
     }
+    /* FULLSCREEN OVERLAY */
+#countdownScreen, #lockScreen{
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#ffdce5,#ffeede);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:99999;
+}
+
+.lockBox{
+background:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 20px 60px rgba(0,0,0,0.25);
+max-width:320px;
+}
+
+.lockBox input{
+margin-top:10px;
+padding:10px;
+border-radius:20px;
+border:none;
+background:#ffeef3;
+text-align:center;
+}
+
+.lockBox button{
+margin-top:10px;
+padding:10px 18px;
+border:none;
+border-radius:20px;
+background:#ff8fa3;
+color:white;
+cursor:pointer;
+}
 
     .btn:hover { transform: scale(1.1); }
 
@@ -173,6 +213,22 @@
   </style>
 </head>
 <body>
+  <!-- COUNTDOWN SCREEN -->
+<div id="countdownScreen">
+  <div class="lockBox">
+    <h2>Something unlocks soon ❤️</h2>
+    <p id="countdownText"></p>
+  </div>
+</div>
+
+<!-- PASSWORD SCREEN (hidden initially) -->
+<div id="lockScreen" style="display:none;">
+  <div class="lockBox">
+    <h2>It's Your Day 🎂</h2>
+    <input id="lockPass" placeholder="Enter password..." />
+    <button onclick="tryUnlock()">Enter</button>
+  </div>
+</div>
 
 
 
@@ -468,6 +524,49 @@ function enterSite() {
   if (music) music.play().catch(()=>{});
 });
 }
+
+  /* ===============================
+   COUNTDOWN → PASSWORD FLOW
+================================ */
+
+const unlockTime = new Date("2026-02-25T00:00:00").getTime();
+const correctPassword = "148";
+
+// countdown logic
+function updateCountdown(){
+  const now = new Date().getTime();
+  const diff = unlockTime - now;
+  const text = document.getElementById("countdownText");
+
+  if(diff <= 0){
+    // switch screens
+    document.getElementById("countdownScreen").style.display = "none";
+    document.getElementById("lockScreen").style.display = "flex";
+    return;
+  }
+
+  const days = Math.floor(diff/(1000*60*60*24));
+  const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const mins = Math.floor((diff%(1000*60*60))/(1000*60));
+  const secs = Math.floor((diff%(1000*60))/1000);
+
+  text.innerText = `${days}d ${hours}h ${mins}m ${secs}s`;
+}
+
+// password unlock
+function tryUnlock(){
+  const val = document.getElementById("lockPass").value.trim();
+
+  if(val === correctPassword){
+    document.getElementById("lockScreen").style.display = "none";
+  } else {
+    alert("Wrong password 😝");
+  }
+}
+
+// start countdown
+setInterval(updateCountdown,1000);
+updateCountdown();
 </script>
 
 </body>
