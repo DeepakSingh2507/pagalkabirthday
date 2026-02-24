@@ -439,43 +439,35 @@ function nextReason(){
 setInterval(spawnPetal, 800);
 </script>
 
-<!-- YouTube Music Placeholder -->
-<!-- Paste your YouTube embed link below (replace VIDEO_ID) -->
-<!-- Example: https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID -->
-<iframe id="ytPlayer" width="0" height="0" src="https://www.youtube.com/embed/7LRMVzjylpA?autoplay=1&loop=1&playlist=7LRMVzjylpA" frameborder="0" allow="autoplay"></iframe>
+  <!-- BACKGROUND MUSIC (YouTube) -->
+<iframe id="ytMusic"
+width="0" height="0"
+src="https://www.youtube.com/embed/7LRMVzjylpA?loop=1&playlist=7LRMVzjylpA"
+allow="autoplay">
+</iframe>
 
-<!-- Sajda Music (fallback local) -->
-<audio id="bgMusic" loop>
-  <source src="https://www.youtube.com/embed/7LRMVzjylpA?autoplay=1&loop=1&playlist=7LRMVzjylpA" type="audio/mpeg">
-</audio>
 
 <script>
-// Play music on first user interaction (fix mobile autoplay issues)
+/* =========================
+   RELIABLE YOUTUBE MUSIC
+========================= */
+
 let musicStarted = false;
-document.addEventListener('click', () => {
-  if (!musicStarted) {
-    const yt = document.getElementById('ytPlayer');
-    if (yt && yt.src) {
-      // YouTube will play if link provided
-    } else {
-      const music = document.getElementById('bgMusic');
-      if (music) music.play().catch(()=>{});
-    }
-    musicStarted = true;
-  }
-});
-    musicStarted = true;
-  }
-}););
-  document.getElementById('musicOverlay').style.display = 'none';
+
+function startMusic() {
+  if (musicStarted) return;
+
+  const iframe = document.getElementById("ytMusic");
+
+  // reload with autoplay enabled
+  iframe.src = iframe.src + "&autoplay=1&mute=0";
+
+  musicStarted = true;
 }
 
-function enterSite() {
-  const music = document.getElementById('bgMusic');
-  if (music) music.play().catch(()=>{});
-});
-}
-
+// Start music on first user interaction
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
 
 
 </script>
